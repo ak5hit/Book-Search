@@ -3,6 +3,7 @@
     package="tech.techbug.booksearch">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -18,9 +19,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ResultsActivity" />
+        <activity
+            android:name=".ResultsActivity"
+            android:parentActivityName=".SearchActivity"/>
         <activity android:name=".ListItemActivity" />
-        <activity android:name=".PopUpWindow"></activity>
+        <activity android:name=".PopUpWindow" />
     </application>
 
 </manifest>

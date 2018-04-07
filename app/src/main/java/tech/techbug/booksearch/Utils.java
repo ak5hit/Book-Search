@@ -24,16 +24,29 @@ import java.util.List;
 
 public final class Utils {
 
+    /**
+     * This method takes request url ans string and returns ArrayList of all the
+     * books matching user query
+     * @param requestUrl is the url where we have to make a get request
+     * @return the list of BookDetails object
+     */
     public static ArrayList<BookDetails> fetchDataFrom(String requestUrl) {
-        ArrayList<BookDetails> booksList;
+        ArrayList<BookDetails> booksList = null;
 
         URL url = createUrl(requestUrl);
         String JSONresponse = makeHttpRequest(url);
-        booksList = parseJSONinJava(JSONresponse);
+
+        if (JSONresponse != null)
+            booksList = parseJSONinJava(JSONresponse);
 
         return booksList;
     }
 
+    /**
+     * This method creates URl object using string and also handling the exception
+     * @param requestUrl is the url where we have to make a get request
+     * @return the URL object of requestURL string
+     */
     private static URL createUrl(String requestUrl) {
         URL url = null;
         try {
@@ -44,6 +57,12 @@ public final class Utils {
         return url;
     }
 
+    /**
+     * Make get request to input url using HttpUrlConnection and after receiving stream
+     * it calls readInputStream and form string of JSON response to return it
+     * @param url is the request url
+     * @return the json response in form of string
+     */
     private static String makeHttpRequest(URL url) {
         HttpURLConnection urlConnection;
         InputStream inputStream;
@@ -62,9 +81,15 @@ public final class Utils {
         } catch (IOException e) {
             Log.e("makeHttpRequest", "Exception thrown while doing connection stuff", e);
         }
+        Log.e("response", JSONresponse);
         return JSONresponse;
     }
 
+    /**
+     * Just take input stream and convert it into string using readInputStream and bufferReader
+     * @param inputStream is the input stream we get as response after GET call
+     * @return
+     */
     private static String readInputStream(InputStream inputStream) {
         StringBuilder jsonResponse = new StringBuilder();
         InputStreamReader inputStreamReader = new InputStreamReader(inputStream, Charset.defaultCharset());
@@ -83,12 +108,19 @@ public final class Utils {
         return jsonResponse.toString();
     }
 
+    /**
+     * This method simply creates JSON object and parse in java and get required information
+     * @param jsonResponse is the string of jsonResponse
+     * @return the ArrayList of BookDetails object
+     */
     private static ArrayList<BookDetails> parseJSONinJava(String jsonResponse) {
         ArrayList<BookDetails> bookList = new ArrayList<>();
 
         try {
             JSONObject root = new JSONObject(jsonResponse);
-            JSONArray items = root.getJSONArray("items");
+            JSONArray items = root.optJSONArray("items");
+            if(items == null)
+                return bookList;
 
             for (int i = 0; i < items.length(); ++i) {
                 JSONObject item = items.getJSONObject(i);
@@ -111,6 +143,12 @@ public final class Utils {
         return bookList;
     }
 
+    /**
+     * Takes JSONArray of authors of book and
+     * create string of their names with commas b/w
+     * @param authors
+     * @return
+     */
     private static String getAuthorList(JSONArray authors) {
         StringBuilder author = new StringBuilder();
 

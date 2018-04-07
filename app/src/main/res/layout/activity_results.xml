@@ -13,26 +13,6 @@
         android:divider="@null"
         android:dividerHeight="0dp" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:fontFamily="sans-serif-light"
-        android:gravity="center"
-        android:text="No Match Found"
-        android:textSize="20sp"
-        android:visibility="gone" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:fontFamily="sans-serif-light"
-        android:gravity="center"
-        android:visibility="gone"
-        android:text="Broken Internet Connection"
-        android:textSize="20sp" />
-
     <ProgressBar
         android:id="@+id/spinner"
         android:layout_width="wrap_content"
@@ -45,5 +25,15 @@
         android:layout_height="match_parent"
         android:background="#C0000000"
         android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/no_book_found"
+        style="@style/EmptyActivityDisplayTextStyle"
+        android:text="@string/no_book_found_text" />
+
+    <TextView
+        android:id="@+id/internet_connection"
+        style="@style/EmptyActivityDisplayTextStyle"
+        android:text="@string/check_internet_connection_text" />
 
 </RelativeLayout>

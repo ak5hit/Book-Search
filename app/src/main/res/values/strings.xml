@@ -3,5 +3,9 @@
     <string name="title_na_text">Title Not Available</string>
     <string name="count_na_text">Count N/A</string>
     <string name="search_button_text">SEARCH</string>
+    <string name="buy_button_text">Buy</string>
+    <string name="description">DESCRIPTION</string>
+    <string name="no_book_found_text">No Match Found</string>
+    <string name="check_internet_connection_text">Check Internet Connection</string>
 </resources>
 
